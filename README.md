@@ -1,5 +1,15 @@
 # docker-cups-canon-airprint
 
+> [!IMPORTANT]
+> **Exact fork of [tigattack/docker-cups-canon-airprint](https://github.com/tigattack/docker-cups-canon-airprint)
+> with updated libraries.** Upstream stopped building in March 2025. Nothing here changes how
+> the image behaves; the only differences are:
+> - the base is pinned to `debian:bookworm-slim` (what upstream's `stable-slim` resolved to when
+>   it last built; `trixie` renames several packages this Dockerfile installs) and `apt upgrade`
+>   runs at build time, so every build ships current Debian security fixes;
+> - CI rebuilds weekly and on every push to `master`, and publishes
+>   `ghcr.io/nicandris/docker-cups-canon-airprint` (`linux/amd64`, `linux/arm64`).
+
 ## Purpose
 
 A Docker image with:
@@ -16,7 +26,7 @@ A Docker image with:
 
 ## Run It
 ```shell
-docker run -d --rm --network host --name cups ghcr.io/tigattack/cups-canon-airprint
+docker run -d --rm --network host --name cups ghcr.io/nicandris/docker-cups-canon-airprint
 ```
 
 ### Variables overview

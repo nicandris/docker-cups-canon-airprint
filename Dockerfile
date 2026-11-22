@@ -1,4 +1,4 @@
-FROM debian:stable-slim AS driver_dl
+FROM debian:bookworm-slim AS driver_dl
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG CNIJFILTER2_URL=https://gdlp01.c-wss.com/gds/0/0100012300/02/cnijfilter2-6.80-1-deb.tar.gz
@@ -17,12 +17,13 @@ RUN wget -q -O /tmp/cnijfilter2.deb.tar.gz "${CNIJFILTER2_URL}" &&\
     done &&\
     ls -l /tmp/drivers
 
-FROM debian:stable-slim
+FROM debian:bookworm-slim
 
 ARG TARGETARCH
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update &&\
+    apt -y upgrade &&\
     apt -y --no-install-recommends install \
     ca-certificates \
     cups-daemon \
